@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewSubtipoproductoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewSubtipoproductoLabel_id}"/>
+                    <h:outputText value="#{subtipoproductoController.selected.id}" title="#{bundle.ViewSubtipoproductoTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewSubtipoproductoLabel_nombre}"/>
+                    <h:outputText value="#{subtipoproductoController.selected.nombre}" title="#{bundle.ViewSubtipoproductoTitle_nombre}"/>
+                    <h:outputText value="#{bundle.ViewSubtipoproductoLabel_descripcion}"/>
+                    <h:outputText value="#{subtipoproductoController.selected.descripcion}" title="#{bundle.ViewSubtipoproductoTitle_descripcion}"/>
+                    <h:outputText value="#{bundle.ViewSubtipoproductoLabel_estado}"/>
+                    <h:outputText value="#{subtipoproductoController.selected.estado}" title="#{bundle.ViewSubtipoproductoTitle_estado}"/>
+                    <h:outputText value="#{bundle.ViewSubtipoproductoLabel_idTipoProducto}"/>
+                    <h:outputText value="#{subtipoproductoController.selected.idTipoProducto}" title="#{bundle.ViewSubtipoproductoTitle_idTipoProducto}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{subtipoproductoController.destroyAndView}" value="#{bundle.ViewSubtipoproductoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewSubtipoproductoEditLink}"/>
+                <br />
+                <h:commandLink action="#{subtipoproductoController.prepareCreate}" value="#{bundle.ViewSubtipoproductoCreateLink}" />
+                <br />
+                <h:commandLink action="#{subtipoproductoController.prepareList}" value="#{bundle.ViewSubtipoproductoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewSubtipoproductoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

@@ -1,0 +1,199 @@
+<?xml version='1.0' encoding='UTF-8' ?> 
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+
+       <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <!-- Tell the browser to be responsive to screen width -->
+        <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport"/>
+        <title>Administrador | Restaurante</title>
+        <!-- Bootstrap 3.3.7 -->
+        <h:outputStylesheet name="bower_components/bootstrap/dist/css/bootstrap.min.css"/>
+        <!-- Font Awesome -->
+        <h:outputStylesheet name="bower_components/font-awesome/css/font-awesome.min.css"/>
+        <!-- Ionicons -->
+        <h:outputStylesheet name="bower_components/Ionicons/css/ionicons.min.css"/>
+         <!-- Morris chart -->
+        <h:outputStylesheet name="bower_components/morris.js/morris.css"/>
+        <!-- jvectormap -->
+        <h:outputStylesheet name="bower_components/jvectormap/jquery-jvectormap.css"/>
+        <!-- Date Picker -->
+        <h:outputStylesheet name="bower_components/bootstrap-datepicker/dist/css/bootstrap-datepicker.min.css"/>
+        <!-- Daterange picker -->
+        <h:outputStylesheet name="bower_components/bootstrap-daterangepicker/daterangepicker.css"/>
+        
+        <!-- Theme style -->
+        <h:outputStylesheet name="dist/css/AdminLTE.min.css"/>
+        <!-- Estilos Personalizados -->
+        <h:outputStylesheet name="dist/css/estilosPersonalizados.css"/>
+        <!-- AdminLTE Skins. Choose a skin from the css/skins
+             folder instead of downloading all of them to reduce the load. -->
+        <h:outputStylesheet name="dist/css/skins/_all-skins.min.css"/>
+        <!-- bootstrap wysihtml5 - text editor -->
+        <h:outputStylesheet name="plugins/bootstrap-wysihtml5/bootstrap3-wysihtml5.min.css"/>
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+        <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    <!-- Google Font -->
+    <!--
+        <h:outputStylesheet name="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,600,700,300italic,400italic,600italic"/>
+    -->
+    </h:head>
+    
+     <h:body class="hold-transition skin-blue sidebar-mini">
+        <div class="wrapper">
+
+            <!-- *************** ESTE ES EL CODIGO PARA EL NAVBAR SUPERIOR ************ -->
+            <header class="main-header">
+                <!-- Logo -->
+                <a href="#" class="logo">
+                    <!-- mini logo for sidebar mini 50x50 pixels -->
+                    <span class="logo-mini"><b>R</b>AD</span>
+                    <!-- logo for regular state and mobile devices -->
+                    <span class="logo-lg"><b>REST</b>ADMIN</span>
+                </a>
+                <!-- Header Navbar: style can be found in header.less -->
+                <nav class="navbar navbar-static-top">
+                    <!-- Sidebar toggle button-->
+                    <a href="#" class="sidebar-toggle" data-toggle="push-menu" role="button">
+                        <span class="sr-only">Toggle navigation</span>
+                    </a>
+
+                    <div class="navbar-custom-menu">
+                        <ul class="nav navbar-nav">
+                            <!-- Cuenta de usuario: el style puede ser encontrado en dropdown.less -->
+                            <li class="dropdown user user-menu">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                    <!---<img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image"/>
+                                    -->
+                                    <span class="hidden-xs">Usuaurio: Jrosales</span>
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <!-- User image -->
+                                    <li class="user-header">
+                                     
+                                        <p>
+                                          
+                                            <small>Subtema</small>
+                                        </p>
+                                    </li>
+                                    <!-- Menu Body -->
+                                    <li class="user-body">
+                                        <div class="row">
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Opcion 1</a>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Opcion 2</a>
+                                            </div>
+                                            <div class="col-xs-4 text-center">
+                                                <a href="#">Opcion 3</a>
+                                            </div>
+                                        </div>
+                                        <!-- /.row -->
+                                    </li>
+                                    <!-- Menu Footer-->
+                                    <li class="user-footer">
+                                        <div class="pull-left">
+                                            <a href="#" class="btn btn-default btn-flat">Perfil</a>
+                                        </div>
+                                        <div class="pull-right">
+                                            <a href="#" class="btn btn-default btn-flat">Salir</a>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </li>
+                            <!-- Control Sidebar Toggle Button -->
+                            <li>
+                                <a href="#" data-toggle="control-sidebar"><i class="fa fa-gears"></i></a>
+                            </li>
+                        </ul>
+                    </div>
+                </nav>
+            </header>
+
+
+            <!-- *************** ESTE ES EL CODIGO PARA LA COLUMNA MENU IZQUIERDA ************ -->
+            <aside class="main-sidebar">
+                <!-- sidebar: style can be found in sidebar.less -->
+                <section class="sidebar">
+                    <!-- Sidebar user panel -->
+                    <div class="user-panel">
+                       
+                    </div>
+
+                    <!-- *************** AQUI INICIAN LAS OPCIONES DEL MENU DE LA IZQUIERDA ************ -->
+                    <!-- 
+                    <ui:insert name="opcionesMenu">
+                        Sin opciones cargadas
+                    </ui:insert> 
+                    -->
+                    <ul class="sidebar-menu" data-widget="tree">
+                        <li class="header">Opciones</li>
+                        <li class="active treeview">
+                            <h:link outcome="/tipodeproducto/List">
+                                <i class="fa fa-cubes"></i> <span>Tipos de producto</span>
+                            </h:link>
+                        </li>
+                        <li class="treeview">
+                            <h:link outcome="/unidaddemedida/List">
+                                <i class="fa fa-balance-scale"></i> <span>Unidades de medida</span>
+                            </h:link>
+                        </li>
+                        <li class="treeview">
+                            <h:link outcome="/plato/List">
+                                <i class="fa fa-cutlery"></i> <span>Platos</span>
+                            </h:link>
+                        </li>
+                        <li class="treeview">
+                            <h:link outcome="/producto/List">
+                                <i class="fa fa-cutlery"></i> <span>Producto</span>
+                            </h:link>
+                        </li>
+                        <li class="treeview">
+                            <h:link outcome="/mesa/List">
+                                <i class="fa fa-cutlery"></i> <span>Mesas</span>
+                            </h:link>
+                        </li>
+                      
+                    </ul>
+                    <!-- *************** AQUI TERMINAN LAS OPCIONES DEL MENU DE LA IZQUIERDA ************ -->
+
+
+                </section>
+                <!-- /.sidebar -->
+            </aside>
+
+
+            <!-- *************** ESTE ES EL CODIGO PARA EL CONTENIDO (TABLAS, FORMULARIOS, ETC.) ************ -->
+            <div class="content-wrapper">
+                <!-- CONTENIDO PRINCIPAL -->
+                <ui:insert name="contenido">SIN ASIGNAR CONTENIDO</ui:insert>
+            </div>
+            <!-- /.content-wrapper -->
+
+
+            <!-- *************** ESTE ES EL CODIGO PARA EL PIE DE PAGINA  *********************************** -->
+            <footer class="main-footer">
+                <div class="pull-right hidden-xs">
+                    <b>Version</b> 2.4.0
+                </div>
+                <strong>Copyright &copy; 2014-2016 </strong> All rights
+                reserved.
+            </footer>
+
+        </div>
+        <!-- ./wrapper -->
+
+        
+        <ui:insert name="modales"></ui:insert>
+        
+    </h:body>
+
+  
+</html>

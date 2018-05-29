@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ListDetallemenuTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:form styleClass="jsfcrud_list_form">
+                <h:panelGroup id="messagePanel" layout="block">
+                    <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+                </h:panelGroup>
+                <h:outputText escape="false" value="#{bundle.ListDetallemenuEmpty}" rendered="#{detallemenuController.items.rowCount == 0}"/>
+                <h:panelGroup rendered="#{detallemenuController.items.rowCount > 0}">
+                    <h:outputText value="#{detallemenuController.pagination.pageFirstItem + 1}..#{detallemenuController.pagination.pageLastItem + 1}/#{detallemenuController.pagination.itemsCount}"/>&nbsp;
+                    <h:commandLink action="#{detallemenuController.previous}" value="#{bundle.Previous} #{detallemenuController.pagination.pageSize}" rendered="#{detallemenuController.pagination.hasPreviousPage}"/>&nbsp;
+                    <h:commandLink action="#{detallemenuController.next}" value="#{bundle.Next} #{detallemenuController.pagination.pageSize}" rendered="#{detallemenuController.pagination.hasNextPage}"/>&nbsp;
+                    <h:dataTable value="#{detallemenuController.items}" var="item" border="0" cellpadding="2" cellspacing="0" rowClasses="jsfcrud_odd_row,jsfcrud_even_row" rules="all" style="border:solid 1px">
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDetallemenuTitle_idDetalle}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idDetalle}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDetallemenuTitle_idMenu}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMenu}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListDetallemenuTitle_idProducto}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idProducto}"/>
+                        </h:column>
+                        <h:column>
+                            <f:facet name="header">
+                                <h:outputText value="&nbsp;"/>
+                            </f:facet>
+                            <h:commandLink action="#{detallemenuController.prepareView}" value="#{bundle.ListDetallemenuViewLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{detallemenuController.prepareEdit}" value="#{bundle.ListDetallemenuEditLink}"/>
+                            <h:outputText value=" "/>
+                            <h:commandLink action="#{detallemenuController.destroy}" value="#{bundle.ListDetallemenuDestroyLink}"/>
+                        </h:column>
+                    </h:dataTable>
+                </h:panelGroup>
+                <br />
+                <h:commandLink action="#{detallemenuController.prepareCreate}" value="#{bundle.ListDetallemenuCreateLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ListDetallemenuIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

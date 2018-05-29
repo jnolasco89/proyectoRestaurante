@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateTipodeproductoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateTipodeproductoLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{tipodeproductoController.selected.id}" title="#{bundle.CreateTipodeproductoTitle_id}" required="true" requiredMessage="#{bundle.CreateTipodeproductoRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateTipodeproductoLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{tipodeproductoController.selected.nombre}" title="#{bundle.CreateTipodeproductoTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.CreateTipodeproductoLabel_descripcion}" for="descripcion" />
+                    <h:inputText id="descripcion" value="#{tipodeproductoController.selected.descripcion}" title="#{bundle.CreateTipodeproductoTitle_descripcion}" />
+                    <h:outputLabel value="#{bundle.CreateTipodeproductoLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{tipodeproductoController.selected.estado}" title="#{bundle.CreateTipodeproductoTitle_estado}" />
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{tipodeproductoController.create}" value="#{bundle.CreateTipodeproductoSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{tipodeproductoController.prepareList}" value="#{bundle.CreateTipodeproductoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateTipodeproductoIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

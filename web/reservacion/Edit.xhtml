@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditReservacionTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditReservacionLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{reservacionController.selected.id}" title="#{bundle.EditReservacionTitle_id}" required="true" requiredMessage="#{bundle.EditReservacionRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditReservacionLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{reservacionController.selected.fecha}" title="#{bundle.EditReservacionTitle_fecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReservacionLabel_hora}" for="hora" />
+                    <h:inputText id="hora" value="#{reservacionController.selected.hora}" title="#{bundle.EditReservacionTitle_hora}" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.EditReservacionLabel_numeroPersonas}" for="numeroPersonas" />
+                    <h:inputText id="numeroPersonas" value="#{reservacionController.selected.numeroPersonas}" title="#{bundle.EditReservacionTitle_numeroPersonas}" />
+                    <h:outputLabel value="#{bundle.EditReservacionLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{reservacionController.selected.estado}" title="#{bundle.EditReservacionTitle_estado}" />
+                    <h:outputLabel value="#{bundle.EditReservacionLabel_idCliente}" for="idCliente" />
+                    <h:selectOneMenu id="idCliente" value="#{reservacionController.selected.idCliente}" title="#{bundle.EditReservacionTitle_idCliente}" >
+                        <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <h:commandLink action="#{reservacionController.update}" value="#{bundle.EditReservacionSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditReservacionViewLink}"/>
+                <br />
+                <h:commandLink action="#{reservacionController.prepareList}" value="#{bundle.EditReservacionShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditReservacionIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

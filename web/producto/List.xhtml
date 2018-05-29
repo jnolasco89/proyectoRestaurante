@@ -1,0 +1,289 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../layout/layout.xhtml">
+        <ui:define name="contenido">
+            <section class="content-header">
+                <h1>
+                    PRODUCTOS
+                </h1>
+            </section>
+            <section class="content">
+
+                <!-- COLOR PALETTE -->
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-tag"></i> Titulo</h3>
+                    </div>
+                    <div class="box-body">
+                        <h:form id="formTablaProductos">
+                            <p:growl id="msj" showDetail="true" life="3000"></p:growl>
+
+                            <h:panelGrid columns="1">
+                                <p:commandButton value="Agregar" icon="fa fa-plus" onclick="PF('modalAgregarPlato').show()">
+                                </p:commandButton>
+                            </h:panelGrid>
+                            <br></br>
+                            <p:dataTable id="tablaPlatos" 
+                                         var="item" 
+                                         value="#{platoController.platos}"
+                                         rows="5" 
+                                         paginator="true" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         rowsPerPageTemplate="5,10,15,20,25"
+                                         emptyMessage="No se encontraron registros."   
+                                         >
+                                <p:column headerText="Codigo" sortBy="#{item.codigo}">
+                                    <h:outputText value="#{item.codigo}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Nombre" sortBy="#{item.nombre}">
+                                    <h:outputText value="#{item.nombre}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Precio" sortBy="#{item.precio}">
+                                    <h:outputText value="#{item.precio}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Estado" sortBy="#{item.estado}">
+                                    <h:outputText value="#{item.estado}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Opciones" style="width: 100px;text-align: center">
+                                    <p:commandButton title="Detalles" icon="fa fa-search" action="#{platoController.setSelected(item)}" update=":formDetallesPlato:outputDetallesPlato" oncomplete="PF('modalDetallesPlato').show()">
+                                    </p:commandButton>
+                                    <p:commandButton title="Editar" icon="fa fa-pencil" action="#{platoController.setSelected(item)}" update=":formEditarPlato:outputEditarPlato" oncomplete="PF('modalEditarPlato').show()">
+                                    </p:commandButton>
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:form>
+
+                        <h:form id="formDetallesPlato">
+                            <p:dialog header="Informacion de plato" widgetVar="modalDetallesPlato" resizable="false" modal="true">
+                                <p:outputPanel id="outputDetallesPlato">
+                                    <div style="width:700px;">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtCodigo" value="Codigo" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtCodigo" value="#{platoController.selected.codigo}" label="Codigo"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtNombre" value="Nombre" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtNombre" value="#{platoController.selected.nombre}" label="Nombre"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtTipoDePlato" value="Tipo" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtTipoDePlato" value="" label="Tipo"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtPrecio" value="Precio" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtPrecio" value="#{platoController.selected.precio}" label="Precio"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtDescripcion" value="Descripcion" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtDescripcion" value="#{platoController.selected.descripcion}" label="Descripcion"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <p:dataTable var="porcion" value="#{platoController.selected.porciones}">
+                                                    <p:column headerText="Codigo">
+                                                        <h:outputText value="#{porcion.codigo}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Nombre">
+                                                        <h:outputText value="#{porcion.nombre}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Tipo de porcion">
+                                                        <h:outputText value="#{porcion.nombre}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Precio">
+                                                        <h:outputText value="#{porcion.precio}" />
+                                                    </p:column>
+
+                                                </p:dataTable>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 blockDeBotones">
+                                                <br></br>
+                                                <p:commandButton value="Aceptar" icon="ui-icon-check"  action="#{platoController.setSelected(null)}" oncomplete="PF('modalDetallesPlato').hide()">
+                                                </p:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+
+                        <h:form id="formEditarPlato">
+                            <p:dialog header="Editar plato" widgetVar="modalEditarPlato" resizable="false" modal="true">
+                                <p:outputPanel id="outputEditarPlato">
+                                    <div style="width:700px;">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtCodigo" value="Codigo" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtCodigo" value="#{platoController.selected.codigo}" label="Codigo"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtNombre" value="Nombre" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtNombre" value="#{platoController.selected.nombre}" label="Nombre"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtTipoDePlato" value="Tipo" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtTipoDePlato" value="" label="Tipo"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtPrecio" value="Precio" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtPrecio" value="#{platoController.selected.precio}" label="Precio"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtDescripcion" value="Descripcion" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtDescripcion" value="#{platoController.selected.descripcion}" label="Descripcion"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <p:dataTable var="porcion" value="#{platoController.selected.porciones}">
+                                                    <p:column headerText="Codigo">
+                                                        <h:outputText value="#{porcion.codigo}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Nombre">
+                                                        <h:outputText value="#{porcion.nombre}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Tipo de porcion">
+                                                        <h:outputText value="#{porcion.nombre}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Precio">
+                                                        <h:outputText value="#{porcion.precio}" />
+                                                    </p:column>
+
+                                                </p:dataTable>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 blockDeBotones">
+                                                <br></br>
+                                                <p:commandButton value="Aceptar" icon="ui-icon-check">
+                                                </p:commandButton>
+                                                <p:commandButton value="Cancelar" icon="ui-icon-close"  action="#{platoController.setSelected(null)}" oncomplete="PF('modalEditarPlato').hide()">
+                                                </p:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+                        
+                        
+                         <h:form id="formAgregarPlato">
+                            <p:dialog header="Agregar plato" widgetVar="modalAgregarPlato" resizable="false" modal="true">
+                                    <div style="width:700px;">
+                                        <div class="row">
+                                            <div class="col-sm-6">
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtCodigo" value="Codigo" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtCodigo" value="#{platoController.selected.codigo}" label="Codigo"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtNombre" value="Nombre" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtNombre" value="#{platoController.selected.nombre}" label="Nombre"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtTipoDePlato" value="Tipo" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtTipoDePlato" value="" label="Tipo"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtPrecio" value="Precio" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtPrecio" value="#{platoController.selected.precio}" label="Precio"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group row">
+                                                    <p:outputLabel for="txtDescripcion" value="Descripcion" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                                    <div class="col-sm-8 col-lg-8">
+                                                        <p:inputText id="txtDescripcion" value="#{platoController.selected.descripcion}" label="Descripcion"/>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                            <div class="col-sm-6">
+                                                <p:dataTable var="porcion" value="#{platoController.selected.porciones}">
+                                                    <p:column headerText="Codigo">
+                                                        <h:outputText value="#{porcion.codigo}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Nombre">
+                                                        <h:outputText value="#{porcion.nombre}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Tipo de porcion">
+                                                        <h:outputText value="#{porcion.nombre}" />
+                                                    </p:column>
+
+                                                    <p:column headerText="Precio">
+                                                        <h:outputText value="#{porcion.precio}" />
+                                                    </p:column>
+
+                                                </p:dataTable>
+                                            </div>
+                                        </div>
+                                        <div class="row">
+                                            <div class="col-sm-12 blockDeBotones">
+                                                <br></br>
+                                                <p:commandButton value="Aceptar" icon="ui-icon-check">
+                                                </p:commandButton>
+                                                <p:commandButton value="Cancelar" icon="ui-icon-close"  action="#{platoController.setSelected(null)}" oncomplete="PF('modalEditarPlato').hide()">
+                                                </p:commandButton>
+                                            </div>
+                                        </div>
+                                    </div>
+                            </p:dialog>
+                        </h:form>
+
+                    </div>
+                    <!-- /.box-body -->
+                </div>
+            </section>
+        </ui:define>
+    </ui:composition>
+</html>

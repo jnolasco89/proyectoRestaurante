@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.CreateServicioTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{servicioController.selected.id}" title="#{bundle.CreateServicioTitle_id}" required="true" requiredMessage="#{bundle.CreateServicioRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_fecha}" for="fecha" />
+                    <h:inputText id="fecha" value="#{servicioController.selected.fecha}" title="#{bundle.CreateServicioTitle_fecha}" >
+                        <f:convertDateTime pattern="MM/dd/yyyy" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_horaInicio}" for="horaInicio" />
+                    <h:inputText id="horaInicio" value="#{servicioController.selected.horaInicio}" title="#{bundle.CreateServicioTitle_horaInicio}" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_horaFin}" for="horaFin" />
+                    <h:inputText id="horaFin" value="#{servicioController.selected.horaFin}" title="#{bundle.CreateServicioTitle_horaFin}" >
+                        <f:convertDateTime pattern="HH:mm:ss" />
+                    </h:inputText>
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_cantidadDePersonas}" for="cantidadDePersonas" />
+                    <h:inputText id="cantidadDePersonas" value="#{servicioController.selected.cantidadDePersonas}" title="#{bundle.CreateServicioTitle_cantidadDePersonas}" />
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{servicioController.selected.estado}" title="#{bundle.CreateServicioTitle_estado}" />
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_idCliente}" for="idCliente" />
+                    <h:selectOneMenu id="idCliente" value="#{servicioController.selected.idCliente}" title="#{bundle.CreateServicioTitle_idCliente}" >
+                        <f:selectItems value="#{clientesController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_idEmpleado}" for="idEmpleado" />
+                    <h:selectOneMenu id="idEmpleado" value="#{servicioController.selected.idEmpleado}" title="#{bundle.CreateServicioTitle_idEmpleado}" >
+                        <f:selectItems value="#{empleadoController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                    <h:outputLabel value="#{bundle.CreateServicioLabel_idMesa}" for="idMesa" />
+                    <h:selectOneMenu id="idMesa" value="#{servicioController.selected.idMesa}" title="#{bundle.CreateServicioTitle_idMesa}" >
+                        <f:selectItems value="#{mesaController.itemsAvailableSelectOne}"/>
+                    </h:selectOneMenu>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{servicioController.create}" value="#{bundle.CreateServicioSaveLink}" />
+                <br />
+                <br />
+                <h:commandLink action="#{servicioController.prepareList}" value="#{bundle.CreateServicioShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.CreateServicioIndexLink}"/>
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

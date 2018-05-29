@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewDetallemedidaproductoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewDetallemedidaproductoLabel_id}"/>
+                    <h:outputText value="#{detallemedidaproductoController.selected.id}" title="#{bundle.ViewDetallemedidaproductoTitle_id}"/>
+                    <h:outputText value="#{bundle.ViewDetallemedidaproductoLabel_cantidad}"/>
+                    <h:outputText value="#{detallemedidaproductoController.selected.cantidad}" title="#{bundle.ViewDetallemedidaproductoTitle_cantidad}"/>
+                    <h:outputText value="#{bundle.ViewDetallemedidaproductoLabel_idMedida}"/>
+                    <h:outputText value="#{detallemedidaproductoController.selected.idMedida}" title="#{bundle.ViewDetallemedidaproductoTitle_idMedida}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{detallemedidaproductoController.destroyAndView}" value="#{bundle.ViewDetallemedidaproductoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewDetallemedidaproductoEditLink}"/>
+                <br />
+                <h:commandLink action="#{detallemedidaproductoController.prepareCreate}" value="#{bundle.ViewDetallemedidaproductoCreateLink}" />
+                <br />
+                <h:commandLink action="#{detallemedidaproductoController.prepareList}" value="#{bundle.ViewDetallemedidaproductoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewDetallemedidaproductoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

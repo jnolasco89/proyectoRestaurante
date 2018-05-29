@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditEmpleadoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{empleadoController.selected.id}" title="#{bundle.EditEmpleadoTitle_id}" required="true" requiredMessage="#{bundle.EditEmpleadoRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{empleadoController.selected.codigo}" title="#{bundle.EditEmpleadoTitle_codigo}" />
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_nombres}" for="nombres" />
+                    <h:inputText id="nombres" value="#{empleadoController.selected.nombres}" title="#{bundle.EditEmpleadoTitle_nombres}" />
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_apellidos}" for="apellidos" />
+                    <h:inputText id="apellidos" value="#{empleadoController.selected.apellidos}" title="#{bundle.EditEmpleadoTitle_apellidos}" />
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_dui}" for="dui" />
+                    <h:inputText id="dui" value="#{empleadoController.selected.dui}" title="#{bundle.EditEmpleadoTitle_dui}" />
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_nit}" for="nit" />
+                    <h:inputText id="nit" value="#{empleadoController.selected.nit}" title="#{bundle.EditEmpleadoTitle_nit}" />
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_direccion}" for="direccion" />
+                    <h:inputText id="direccion" value="#{empleadoController.selected.direccion}" title="#{bundle.EditEmpleadoTitle_direccion}" />
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_correo}" for="correo" />
+                    <h:inputText id="correo" value="#{empleadoController.selected.correo}" title="#{bundle.EditEmpleadoTitle_correo}" />
+                    <h:outputLabel value="#{bundle.EditEmpleadoLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{empleadoController.selected.estado}" title="#{bundle.EditEmpleadoTitle_estado}" />
+                </h:panelGrid>
+                <h:commandLink action="#{empleadoController.update}" value="#{bundle.EditEmpleadoSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditEmpleadoViewLink}"/>
+                <br />
+                <h:commandLink action="#{empleadoController.prepareList}" value="#{bundle.EditEmpleadoShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditEmpleadoIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

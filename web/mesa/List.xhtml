@@ -1,0 +1,186 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="./../layout/layout.xhtml">
+        <ui:define name="contenido">
+            <section class="content-header">
+                <h1>
+                    Mesas
+                </h1>
+            </section>
+            <section class="content">
+
+                <!-- COLOR PALETTE -->
+                <div class="box box-default">
+                    <div class="box-header with-border">
+                        <h3 class="box-title"><i class="fa fa-tag"></i> Titulo</h3>
+                    </div>
+                    <div class="box-body">
+                        <h:form id="formTablaMesas">
+                            <p:growl id="msj" showDetail="true" life="6000"></p:growl>
+
+                            <h:panelGrid columns="1">
+                                <p:commandButton value="Agregar" icon="fa fa-plus" onclick="PF('modalAgregarMesa').show()"/>
+                            </h:panelGrid>
+                            <br></br>
+                            <h:panelGrid columns="2" style="margin-bottom:10px" cellpadding="5">
+                                <p:outputLabel for="opciones" value="Opciones:" style="margin-right: 10px;"/>
+                                <p:selectOneRadio id="opciones" value="#{mesaController.buscarPorEstado}">
+                                    <f:selectItem itemLabel="Activos" itemValue="1"/>
+                                    <f:selectItem itemLabel="Inactivos" itemValue="2" />
+                                    <f:selectItem itemLabel="Todos" itemValue="3" />
+                                    <f:ajax event="change" listener="#{mesaController.updateItems}" render="tablaMesas" />
+                                </p:selectOneRadio>
+                            </h:panelGrid>
+                            <br></br>
+                            <p:dataTable id="tablaMesas" 
+                                         var="item" 
+                                         value="#{mesaController.itemsByEstado}"
+                                         rows="5" 
+                                         paginator="true" 
+                                         paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                         currentPageReportTemplate="Pagina: {currentPage}/{totalPages}, Total de elementos: {totalRecords}"
+                                         rowsPerPageTemplate="5,10,15,20,25"
+                                         emptyMessage="No se encontraron registros."   
+                                         >
+                                <p:column headerText="Numero" sortBy="#{item.numero}">
+                                    <h:outputText value="#{item.numero}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Capacidad" sortBy="#{item.capacidad}">
+                                    <h:outputText value="#{item.capacidad}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Estado" sortBy="#{item.estado}">
+                                    <h:outputText value="#{mesaController.estadoToString(item.estado)}"></h:outputText>
+                                </p:column>
+                                <p:column headerText="Opciones" style="width: 100px;text-align: center">
+                                    <p:commandButton rendered="#{mesaController.renderBtnEdit}" 
+                                                     title="Editar" 
+                                                     icon="fa fa-pencil" 
+                                                     action="#{mesaController.setSelected(item)}" 
+                                                     update=":formEditarMesa:outputEditarMesa" 
+                                                     oncomplete="PF('modalEditarMesa').show()">
+                                    </p:commandButton>
+                                    <p:commandButton rendered="#{mesaController.renderBtnDel}" 
+                                                     title="Eliminar" 
+                                                     icon="fa fa-trash-o" 
+                                                     actionListener="#{mesaController.eliminarElemento(item)}"
+                                                     update=":formTablaMesas:tablaMesas :formTablaMesas:msj">
+                                        <p:confirm header="Confirmation" 
+                                                   message="¿Seguro que desea eliminar el elemento?" 
+                                                   icon="ui-icon-alert" />
+                                    </p:commandButton>
+                                    <p:commandButton rendered="#{mesaController.renderBtnReact}" 
+                                                     title="Reactivar" 
+                                                     icon="fa fa-level-up"
+                                                     actionListener="#{mesaController.reactivarElemento(item)}"
+                                                     update=":formTablaMesas:tablaMesas :formTablaMesas:msj">
+                                        <p:confirm header="Confirmation" 
+                                                   message="¿Seguro que desea reactivar el elemento?" 
+                                                   icon="ui-icon-alert" />
+                                    </p:commandButton>
+
+                                </p:column>
+                            </p:dataTable>
+
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                <p:commandButton value="Si" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                            </p:confirmDialog>
+                        </h:form>
+
+                        <h:form id="formAgregarMesa">
+                            <p:dialog header="Agregar mesa" widgetVar="modalAgregarMesa" resizable="false" modal="true">
+                                <p:outputPanel id="outputAgregarMesa">
+                                    <p:panel id="panel">
+                                        <div class="form-group row">
+                                            <p:outputLabel for="txtNumero" value="Numero" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                            <div class="col-sm-8 col-lg-8">
+                                                <p:inputText id="txtNumero" value="#{mesaController.selected.numero}" label="Numero de mesa" required="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <p:outputLabel for="txtCapacidad" value="Capacidad de mesa" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                            <div class="col-sm-8 col-lg-8">
+                                                <p:inputText id="txtCapacidad" value="#{mesaController.selected.capacidad}" label="Capacidad de mesa" required="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row blockDeBotones">
+                                            <p:commandButton 
+                                                value="Agregar" 
+                                                actionListener="#{mesaController.create}" 
+                                                oncomplete="manejadorAgregarRequest(xhr, status, args)" 
+                                                icon="ui-icon-check"
+                                                update=":formTablaMesas:tablaMesas :formTablaMesas:msj formAgregarMesa:outputAgregarMesa"
+                                                >
+                                            </p:commandButton>
+                                            <p:commandButton value="Cancelar" icon="ui-icon-close" onclick="PF('modalAgregarMesa').hide()"/>
+                                        </div>
+                                    </p:panel>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+
+                        <h:form id="formEditarMesa">
+                            <p:dialog header="Editar mesa" widgetVar="modalEditarMesa" resizable="false" modal="true">
+                                <p:outputPanel id="outputEditarMesa">
+                                    <p:panel id="panel">
+                                        <div class="form-group row">
+                                            <p:outputLabel for="txtNumero" value="Numero" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                            <div class="col-sm-8 col-lg-8">
+                                                <p:inputText id="txtNumero" value="#{mesaController.selected.numero}" label="Numero de mesa" required="true"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <p:outputLabel for="txtCapacidad" value="Capacidad de mesa" styleClass="col-sm-4 col-lg-4 col-form-label"/>
+                                            <div class="col-sm-8 col-lg-8">
+                                                <p:inputText id="txtCapacidad" value="#{mesaController.selected.capacidad}" label="Capacidad de mesa" required="true">
+                                                    <f:validateLength minimum="1"/>
+                                                </p:inputText>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row blockDeBotones">
+                                            <p:commandButton 
+                                                value="Editar" 
+                                                actionListener="#{mesaController.update}" 
+                                                oncomplete="manejadorEditarRequest(xhr, status, args)" 
+                                                icon="ui-icon-check"
+                                                update=":formTablaMesas:tablaMesas :formTablaMesas:msj panel"
+                                                >
+                                            </p:commandButton>
+                                            <p:commandButton 
+                                                value="Cancelar" 
+                                                icon="ui-icon-close" 
+                                                onclick="PF('modalEditarMesa').hide()"/>
+                                        </div>
+                                    </p:panel>
+                                </p:outputPanel>
+                            </p:dialog>
+                        </h:form>
+
+                        <script type="text/javascript">
+                            function manejadorAgregarRequest(xhr, status, args) {
+                                if (args.agregado) {
+                                    PF('modalAgregarMesa').hide();
+                                }
+                            }
+                            function manejadorEditarRequest(xhr, status, args) {
+                                if (args.editado) {
+                                    PF('modalEditarMesa').hide();
+                                }
+                            }
+                        </script>
+
+                    </div> 
+                    <!-- /.box-body -->
+                </div>
+
+            </section>
+        </ui:define>
+    </ui:composition>
+
+</html>

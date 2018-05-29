@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.ViewMedidaproductoTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputText value="#{bundle.ViewMedidaproductoLabel_idMedida}"/>
+                    <h:outputText value="#{medidaproductoController.selected.idMedida}" title="#{bundle.ViewMedidaproductoTitle_idMedida}"/>
+                    <h:outputText value="#{bundle.ViewMedidaproductoLabel_idProducto}"/>
+                    <h:outputText value="#{medidaproductoController.selected.idProducto}" title="#{bundle.ViewMedidaproductoTitle_idProducto}"/>
+                    <h:outputText value="#{bundle.ViewMedidaproductoLabel_idUnidaDeMedida}"/>
+                    <h:outputText value="#{medidaproductoController.selected.idUnidaDeMedida}" title="#{bundle.ViewMedidaproductoTitle_idUnidaDeMedida}"/>
+                </h:panelGrid>
+                <br />
+                <h:commandLink action="#{medidaproductoController.destroyAndView}" value="#{bundle.ViewMedidaproductoDestroyLink}"/>
+                <br />
+                <br />
+                <h:link outcome="Edit" value="#{bundle.ViewMedidaproductoEditLink}"/>
+                <br />
+                <h:commandLink action="#{medidaproductoController.prepareCreate}" value="#{bundle.ViewMedidaproductoCreateLink}" />
+                <br />
+                <h:commandLink action="#{medidaproductoController.prepareList}" value="#{bundle.ViewMedidaproductoShowAllLink}"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.ViewMedidaproductoIndexLink}"/>
+
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

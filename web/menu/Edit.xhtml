@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/template.xhtml">
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EditMenuTitle}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+            <h:panelGroup id="messagePanel" layout="block">
+                <h:messages errorStyle="color: red" infoStyle="color: green" layout="table"/>
+            </h:panelGroup>
+            <h:form>
+                <h:panelGrid columns="2">
+                    <h:outputLabel value="#{bundle.EditMenuLabel_id}" for="id" />
+                    <h:inputText id="id" value="#{menuController.selected.id}" title="#{bundle.EditMenuTitle_id}" required="true" requiredMessage="#{bundle.EditMenuRequiredMessage_id}"/>
+                    <h:outputLabel value="#{bundle.EditMenuLabel_codigo}" for="codigo" />
+                    <h:inputText id="codigo" value="#{menuController.selected.codigo}" title="#{bundle.EditMenuTitle_codigo}" />
+                    <h:outputLabel value="#{bundle.EditMenuLabel_nombre}" for="nombre" />
+                    <h:inputText id="nombre" value="#{menuController.selected.nombre}" title="#{bundle.EditMenuTitle_nombre}" />
+                    <h:outputLabel value="#{bundle.EditMenuLabel_estado}" for="estado" />
+                    <h:inputText id="estado" value="#{menuController.selected.estado}" title="#{bundle.EditMenuTitle_estado}" />
+                </h:panelGrid>
+                <h:commandLink action="#{menuController.update}" value="#{bundle.EditMenuSaveLink}"/>
+                <br />
+                <br />
+                <h:link outcome="View" value="#{bundle.EditMenuViewLink}"/>
+                <br />
+                <h:commandLink action="#{menuController.prepareList}" value="#{bundle.EditMenuShowAllLink}" immediate="true"/>
+                <br />
+                <br />
+                <h:link outcome="/index" value="#{bundle.EditMenuIndexLink}" />
+            </h:form>
+        </ui:define>
+    </ui:composition>
+
+</html>

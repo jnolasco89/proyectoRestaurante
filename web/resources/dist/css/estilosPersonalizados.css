@@ -1,0 +1,19 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 05-22-2018, 10:52:56 AM
+    Author     : Nolasco
+*/
+.blockDeBotones{
+    text-align: center;
+}
+
+.blockDeBotones button{
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+
